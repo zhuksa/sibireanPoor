@@ -5,11 +5,13 @@ HEADERS = {'accept': '*/*',
            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)'
                          'Chrome/76.0.3809.100 Safari/537.36'}
 
-BASE_URL = str(input('Введите ссылку на статью:_'))  #'https://lenta.ru/news/2019/08/10/ranen/'
+  #'https://lenta.ru/news/2019/08/10/ranen/'
 
 
-def lenta_parse(BASE_URL, HEADERS):
-    req = Session().get(BASE_URL, headers=HEADERS)
+def lenta_parse(HEADERS):
+    print('Введите ссылку: ')
+    base_url = input()
+    req = Session().get(base_url, headers=HEADERS)
     if req.status_code == 200:
         soup = bs(req.content, 'html.parser')
         h1 = soup.find('h1').text
@@ -28,4 +30,4 @@ def lenta_parse(BASE_URL, HEADERS):
         print('ERROR')
 
 
-lenta_parse(BASE_URL, HEADERS)
+lenta_parse(HEADERS)
